@@ -25,19 +25,22 @@ def print_maze(maze, flood, pos=None, discovered=None):
     for i, row in enumerate(maze):
         for j, val in enumerate(row):
             if discovered and not discovered[i][j]:
-                print('?', end=' ')
+                char = '?'
             elif (i, j) == pos:
-                print('R', end=' ')
+                char = 'R'
             elif (i, j) == goal:
-                print('G', end=' ')
+                char = 'G'
             elif (i, j) == start:
-                print('S', end=' ')
+                char = 'S'
             elif val == 1:
-                print('#', end=' ')
+                char = '#'
             else:
-                print(flood[i][j] if flood[i][j] != float('inf') else '.', end=' ')
+                cell = flood[i][j]
+                char = '.' if cell == float('inf') else str(int(cell))
+            print(char.center(3), end='')
         print()
     print()
+
 
 def neighbors(pos):
     i, j = pos
