@@ -1,22 +1,11 @@
 import time
 import os
 
+from graph_maze import grap_path_taken
+from test_maze import maze
+
+
 # 0 = camino libre, 1 = pared
-maze = [
-    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-    [1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
-    [1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1],
-    [1,0,1,0,1,0,1,1,1,1,1,1,0,1,0,1,1,1,0,1],
-    [1,0,1,0,1,0,1,0,0,0,0,1,0,1,0,1,1,1,0,1],
-    [1,0,1,0,1,0,1,0,1,1,0,1,0,1,0,0,0,1,0,1],
-    [1,0,1,0,1,0,1,0,1,1,0,0,0,1,1,1,0,1,0,1],
-    [1,0,1,0,1,0,1,0,0,0,0,1,0,1,1,1,0,1,0,1],
-    [1,0,1,0,1,0,1,1,1,1,1,1,0,0,0,0,0,0,0,1],
-    [1,0,1,0,1,0,0,0,0,0,0,0,0,1,1,1,1,1,0,1],
-    [1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
-    [1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1],
-    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-]
 start = (1,1)
 goal = (11,18)
 
@@ -40,7 +29,7 @@ def print_maze(maze, pos):
         print()
     print()
 
-def right_hand_rule():
+def right_hand_rule(maze):
     pos = start
     dir_idx = 1  # Empieza mirando a la derecha
     moves = 0
@@ -77,8 +66,9 @@ def right_hand_rule():
         moves += 1
 
     print_maze(maze, pos)
+    grap_path_taken(maze, path)
     print(f"¡Laberinto resuelto en {moves} movimientos!")
     print("Ruta:", path)
 
 if __name__ == "__main__":
-    right_hand_rule()
+    right_hand_rule(maze)

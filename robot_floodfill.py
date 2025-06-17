@@ -1,22 +1,12 @@
 import time
 import os
 
+from graph_maze import grap_path_taken
+from test_maze import maze
+
+
 # 0 = camino libre, 1 = pared
-maze = [
-    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-    [1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
-    [1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1],
-    [1,0,1,0,1,0,1,1,1,1,1,1,0,1,0,1,1,1,0,1],
-    [1,0,1,0,1,0,1,0,0,0,0,1,0,1,0,1,1,1,0,1],
-    [1,0,1,0,1,0,1,0,1,1,0,1,0,1,0,0,0,1,0,1],
-    [1,0,1,0,1,0,1,0,1,1,0,0,0,1,1,1,0,1,0,1],
-    [1,0,1,0,1,0,1,0,0,0,0,1,0,1,1,1,0,1,0,1],
-    [1,0,1,0,1,0,1,1,1,1,1,1,0,0,0,0,0,0,0,1],
-    [1,0,1,0,1,0,0,0,0,0,0,0,0,1,1,1,1,1,0,1],
-    [1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
-    [1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1],
-    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-]
+
 start = (1,1)
 goal = (11,18)
 
@@ -60,7 +50,7 @@ def flood_fill(goal):
                 queue.append((ni, nj))
     return flood
 
-def solve_maze():
+def solve_maze(maze):
     flood = flood_fill(goal)
     pos = start
     path = [pos]
@@ -82,8 +72,9 @@ def solve_maze():
         path.append(pos)
         moves += 1
     print_maze(maze, flood, pos)
+    grap_path_taken(maze, path)
     print(f"¡Laberinto resuelto en {moves} movimientos!")
     print("Ruta:", path)
 
 if __name__ == "__main__":
-    solve_maze()
+    solve_maze(maze)
