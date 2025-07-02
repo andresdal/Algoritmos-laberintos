@@ -1,22 +1,11 @@
 import time
 import os
 
+from graph_maze import grap_path_taken
+from test_maze import maze
+
 # 0 = camino libre, 1 = pared
-maze = [
-    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-    [1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
-    [1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1],
-    [1,0,1,0,1,0,1,1,1,1,1,1,0,1,0,1,1,1,0,1],
-    [1,0,1,0,1,0,1,0,0,0,0,1,0,1,0,1,1,1,0,1],
-    [1,0,1,0,1,0,1,0,1,1,0,1,0,1,0,0,0,1,0,1],
-    [1,0,1,0,1,0,1,0,1,1,0,1,0,1,1,1,0,1,0,1],
-    [1,0,1,0,1,0,1,0,0,0,0,1,0,1,1,1,0,1,0,1],
-    [1,0,1,0,1,0,1,1,1,1,1,1,0,1,1,1,0,0,0,1],
-    [1,0,1,0,1,0,0,0,0,0,0,0,0,1,1,1,1,1,0,1],
-    [1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
-    [1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-]
+
 start = (1,1)
 goal = (11,18)
 
@@ -91,7 +80,7 @@ def solve_maze_exploring():
         flood = flood_fill(goal, discovered, known_maze)
         print_maze(maze, flood, pos, discovered)
         print(f"Movimientos realizados: {moves}")
-        time.sleep(0.7)
+        time.sleep(0.1)
         # Si el objetivo es alcanzable, ir hacia él
         if flood[goal[0]][goal[1]] != float('inf'):
             min_val = float('inf')
@@ -126,6 +115,7 @@ def solve_maze_exploring():
         visited.add(pos)
         moves += 1
     print_maze(maze, flood, pos, discovered)
+    grap_path_taken(maze, path)
     print(f"¡Laberinto resuelto en {moves} movimientos!")
     print("Ruta:", path)
 
